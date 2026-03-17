@@ -1,0 +1,16 @@
+@echo off
+cls
+start "" /wait cmd /c "sfc /scannow"
+
+echo Aguarde enquanto o sistema verifica a integridade da imagem...
+echo os processos podem demorar um tempo...
+echo.
+start "" /wait cmd /c "dism /online /cleanup-image /CheckHealth"
+
+echo Aguarde enquanto o sistema restaura a imagem...
+echo.
+start "" /wait cmd /c "dism /online /cleanup-image /restorehealth"
+
+echo.
+echo O processo foi concluído com sucesso!
+pause

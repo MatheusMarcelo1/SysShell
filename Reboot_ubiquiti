@@ -1,0 +1,25 @@
+from selenium import webdriver
+from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+servico = Service(GeckoDriverManager().install())
+navegador = webdriver.Firefox(service=servico)
+
+user='login'
+password='pass'
+
+navegador.get('http://10.1.1.250/login.cgi')
+
+navegador.find_element('xpath', '//*[@id="username"]').send_keys(user)
+navegador.find_element('xpath', '//*[@id="password"]').send_keys(password)
+navegador.find_element('xpath', '/html/body/table/tbody/tr[2]/td/input').click()
+
+navegador.execute_script("window.open('http://10.1.1.250/reboot.cgi', '_blank');")
+navegador.switch_to.window(navegador.window_handles[1])
+
+WebDriverWait(navegador, 10).until(
+    EC.element_to_be_clickable((By.XPATH, '/html/body/form/table/tbody/tr[2]/td[2]/input'))
+).click()

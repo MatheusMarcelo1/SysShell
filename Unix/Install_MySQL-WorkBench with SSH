@@ -1,0 +1,13 @@
+#Para funcionar o sistema de autenticação do banco de dados MySQL no MySql WorkBench (snap) com conexão SSH
+
+sudo snap install mysql-workbench-community
+
+snap connect mysql-workbench-community:password-manager-service
+snap connect mysql-workbench-community:ssh-keys
+
+snap connect mysql-workbench-community:cups-control
+snap connect mysql-workbench-community:removable-media
+
+
+
+
